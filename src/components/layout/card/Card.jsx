@@ -1,4 +1,4 @@
-// src/components/Card.jsx
+// src/components/Card.js
 import React from "react";
 import Link from "next/link";
 import styles from "./card.module.css";

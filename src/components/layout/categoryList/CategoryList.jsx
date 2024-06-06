@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./categoryList.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import posts from '../mock/data.json';
+import posts from "../../../mock/data.json";
 
 const getData = async () => {
     await new Promise((resolve) => setTimeout(resolve, 100));
@@ -12,7 +12,7 @@ const getData = async () => {
 };
 
 const CategoryList = () => {
-    const [data, setData] = useState([]);
+    const [posts, setData] = useState([]);
   
     useEffect(() => {
       const fetchData = async () => {
@@ -31,7 +31,7 @@ const CategoryList = () => {
       <div>
         <h1 className={styles.title}>Popular Categories</h1>
         <div className={styles.categories}>
-          {data.map((item) => (
+          {posts?.map((item) => (
             <Link
               key={item.id}
               href={`/blog?cat=${item.name.toLowerCase()}`}

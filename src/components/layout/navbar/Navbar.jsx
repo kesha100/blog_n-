@@ -15,12 +15,27 @@ const Navbar = () => {
 
             <div className={styles.logo}></div>
             <div className={styles.links}></div>
-                {/* <ThemeToggle/> */}
-                <Link href='/'>Homepage</Link>
-                <Link href='/'>Contact</Link>
-                <Link href='/'>About</Link>
-                <Link href='/'>Login</Link>
-                {/* <AuthLinks/> */}
+    
+            <nav>
+      <ul>
+        <li>
+          <Link href="/">
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link href="/about">
+            About
+          </Link>
+        </li>
+        <li>
+          <Link href="/blog">
+            Blog
+          </Link>
+        </li>
+      </ul>
+    </nav>
+
 
 
 
