@@ -1,58 +1,66 @@
 .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 100px;
-  }
-  
-  .social {
-    display: flex;
-    gap: 10px;
-    flex: 1;
-  }
-  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+  padding: 0 20px; /* Added padding for better spacing */
+}
+
+.social {
+  display: flex;
+  gap: 10px;
+  flex: 1;
+}
+
+.logo {
+  flex: 1;
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  font-size: 20px;
+}
+
+/* Adjustments for screen sizes smaller than 1280px */
+@media screen and (max-width: 1280px) {
   .logo {
-    flex: 1;
-    text-align: center;
-    font-size: 36px;
-    font-weight: bold;
+    font-size: 32px;
   }
-  
   .links {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex: 1;
-    font-size: 20px;
+    font-size: 18px;
+    gap: 15px;
   }
-  
-  @media screen and (max-width: 1280px) {
-    .logo {
-      font-size: 32px;
-    }
-    .links {
-      font-size: 18px;
-      gap: 15px;
-    }
+}
+
+/* Adjustments for screen sizes smaller than 1024px */
+@media screen and (max-width: 1024px) {
+  .social {
+    display: none; /* Hides social links on smaller screens */
   }
-  @media screen and (max-width: 1024px) {
-    .social {
-      display: none;
-    }
-    .logo {
-      text-align: left;
-    }
+  .logo {
+    text-align: left; /* Aligns logo to the left */
   }
-  @media screen and (max-width: 768px) {
-    .logo {
-      font-size: 24px;
-    }
+}
+
+/* Adjustments for screen sizes smaller than 768px */
+@media screen and (max-width: 768px) {
+  .logo {
+    font-size: 24px;
   }
-  @media screen and (max-width: 640px) {
-    .links{
-      justify-content: flex-end;
-    }
-    .link {
-      display: none;
-    }
+}
+
+/* Adjustments for screen sizes smaller than 640px */
+@media screen and (max-width: 640px) {
+  .links {
+    justify-content: flex-end; /* Aligns links to the right */
   }
+  .link {
+    display: none; /* Hides individual links on the smallest screens */
+  }
+}

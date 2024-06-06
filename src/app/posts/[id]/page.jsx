@@ -1,75 +1,30 @@
-"use client";
+// src/app/posts/[id]/page.jsx
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import Menu from "../../../components/layout/menu/Menu";
-import styles from "./singlePage.module.css";
-import Image from 'next/image';
+import { useParams } from 'next/navigation';
 import posts from '../../../mock/data.json';
+import styles from './Post.module.css';
 
 const getData = async (id) => {
   // Simulate network latency
   await new Promise((resolve) => setTimeout(resolve, 100));
-  const post = posts.posts.find((post) => post.id === parseInt(id, 10));
-  console.log("Fetched post (server-side):", post);  // Server-side log
-  return post;
+  return posts.posts.find((post) => post.id === parseInt(id));
 };
 
-const Post = ({ post }) => {
-  const router = useRouter();
+export default async function Post() {
+  const { id } = useParams();
+  const data = await getData(id);
 
-  useEffect(() => {
-    console.log("Fetched post (client-side):", post);  // Client-side log
-  }, [post]);
-
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
-
-  if (!post) {
-    return <div>Post not found</div>;
+  // If the post is not found, return a simple message
+  if (!data) {
+    return <p>Post not found.</p>;
   }
 
   return (
     <div className={styles.container}>
-      <Menu />
-      <div className={styles.infoContainer}>
-        <div className={styles.textContainer}>
-          <h1 className={styles.title}>{post?.title}</h1>
-          <div className={styles.user}>
-            {post?.image && (
-              <div className={styles.userImageContainer}>
-                <Image src={post.image} alt={post.title} width={150} height={150} className={styles.avatar} />
-              </div>
-            )}
-            <div className={styles.userTextContainer}>
-              <span className={styles.username}>{post?.author}</span>
-              <span className={styles.date}>{post?.date}</span>
-            </div>
-          </div>
-        </div>
-        {post?.image && (
-          <div className={styles.imageContainer}>
-            <Image src={post.image} alt={post.title} width={800} height={300} className={styles.image} />
-          </div>
-        )}
-      </div>
-      <div className={styles.content}>
-        <div className={styles.post}>
-          <div className={styles.description}>
-            {post?.description}
-          </div>
-        </div>
-      </div>
+      <h1 className={styles.title}>{data.title}</h1>
+      <p className={styles.date}>{data.date}</p>
+      <p className={styles.author}>By {data.author}</p>
+      <div className={styles.description}>{data.description}</div>
     </div>
   );
-};
-
-export const getStaticPaths = async () => {
-  const paths = posts.posts.map((post) => ({
-    params: { id: post.id.toString() },
-  }));
-
-  return { paths, fallback: true };
-};
-
+}
